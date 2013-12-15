@@ -9,70 +9,87 @@ MindMap.prototype = {
     init: function() {
         var that = this;
         this.model.on("load", function(event) {
-            that.graphic.draw(that.model);
+            that.graphic.init(that.model);
         });
 
-        this.model.on("add", refresh);
-        this.model.on("remove", refresh);
+        this.model.on("add", function(event) {
+            that.graphic.createNode(event.node);
+        });
+        
+        this.model.on("remove", function(event) {
+            that.graphic.removeNode(event.node);
+        });
         
         this.model.on("update", function(event) {
             that.graphic.update(event.node);    
         });
-
-        function refresh(event) {
-            that.graphic.draw(that.model);
-        }
+    },
+    
+    loadData: function(data) {
+        this.model.loadData(data);    
     }
 };
 
-function MindMapGraphic(container) {
-    this.graphic = new Raphael(container);
+function MindMapGraphic(container, config) {
+    this.paper = new Raphael(container);
+    
+    this.config = config || {gridX: 200, gridY: 50};
 }
 
 MindMapGraphic.prototype = {
-    draw: function(model) {
-
+    init: function(model) {
+        var dim = model.measure();
+        
+        this.createNode(model.rootNode);
     },
     
-    update: function(node) {
+    createNode: function(node) {
+        var nodeGraphic = new MindMapNodeGraphic(this.paper);    
+    },
+    
+    updateNode: function(node) {
+        
+    },
+    
+    removeNode: function(node) {
         
     }
 };
 
+function MindMapNodeGraphic(paper) {
+    this.rect;
+    this.connection = paper.path("M10 10L90 90");
+}
+
+MindMapNodeGraphic.prototype = {
+    refresh: function() {
+        
+    },
+    
+    refreshLine: function() {
+        //this.connection.    
+    }
+};
+
 function MindMapModel() {
-    this.nodes = [];
+    this.rootNode = new MindMapNodeModel({text:"Root"}, null, this);
     this.allNodes = [];
 
     this.eventMap = [];
 }
 
 MindMapModel.prototype = {
-    loadData: function() {
-
+    loadData: function(data) {
+        for (var i=0; i<data.length; i++) {
+            this.rootNode.addChild(data[i]);
+        }
+        
         var event = {type:"load"};
         this.fire(event);
     },
     
-    addNode: function(data, parent) {
-        
-    },
-    
-    removeNode: function(node) {
-        
-    },
-    
     measure: function() {
-        var result = {
-            width: 1,
-            height: 1
-        };
-
-        for (var i=0; i<this.nodes.length; i++) {
-            var childDim = this.nodes[i].measure();
-            result.height += childDim.height;
-            result.width += childDim.width;
-        }
-        return result;
+        return this.rootNode.measure();
     },
 
     on: function(eventType, handler) {
@@ -150,16 +167,33 @@ MindMapNodeModel.prototype = {
     },
 
     measure: function() {
-        var result = {
+        var dim = {
             width: 1,
             height: 1
         };
 
         for (var i=0; i<this.children.length; i++) {
             var childDim = this.children[i].measure();
-            result.height += childDim.height;
-            result.width += childDim.width;
+            dim.height += childDim.height;
+            dim.width += childDim.width;
         }
-        return result;
+        return dim;
     }
 };
+
+var mindmap = new MindMap(document.getElementById("mindmapDiv"));
+mindmap.loadData([{
+    label: "Jiangsu",
+    children: [{
+        label: "Nanjing"
+    }, {
+        label: "Suzhou"
+    }]
+}, {
+    label: "Yunnan",
+    children: [{
+        label: "Kunming"
+    }, {
+        label: "Lijiang"
+    }]
+}]);
