@@ -127,13 +127,21 @@ function MindMapNodeModel(data, parent, mindmap) {
 }
 
 MindMapNodeModel.prototype = {
-    addChild: function(data) {
+    addChild: function(data, needEvent) {
         var node = new MindMapNodeModel(data, this, this.mindmap);
         this.children.push(node);
         this.mindmap.allNodes.push(node);
 
-        var event = {type:"add", node: node};
-        this.mindmap.fire(event);
+	    if (needEvent) {
+		    var event = {type:"add", node: node};
+		    this.mindmap.fire(event);
+	    }
+
+	    if (data.children) {
+		    for (var i=0; i<data.children.length; i++) {
+			    node.addChild(data.children[i], needEvent);
+		    }
+	    }
     },
 
     removeChild: function(node) {
@@ -175,25 +183,28 @@ MindMapNodeModel.prototype = {
         for (var i=0; i<this.children.length; i++) {
             var childDim = this.children[i].measure();
             dim.height += childDim.height;
-            dim.width += childDim.width;
+            //dim.width += childDim.width;
         }
         return dim;
     }
 };
 
-var mindmap = new MindMap(document.getElementById("mindmapDiv"));
-mindmap.loadData([{
-    label: "Jiangsu",
-    children: [{
-        label: "Nanjing"
-    }, {
-        label: "Suzhou"
-    }]
-}, {
-    label: "Yunnan",
-    children: [{
-        label: "Kunming"
-    }, {
-        label: "Lijiang"
-    }]
-}]);
+window.onload = function() {
+
+	var mindmap = new MindMap(document.getElementById("mindmapDiv"));
+	mindmap.loadData([{
+		label: "Jiangsu",
+		children: [{
+			label: "Nanjing"
+		}, {
+			label: "Suzhou"
+		}]
+	}, {
+		label: "Yunnan",
+		children: [{
+			label: "Kunming"
+		}, {
+			label: "Lijiang"
+		}]
+	}]);
+};
