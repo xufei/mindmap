@@ -31,14 +31,16 @@ MindMap.prototype = {
 };
 
 function MindMapGraphic(container, config) {
-	this.paper = new Raphael(container);
+	this.paper = new Raphael(container, 1000, 1000);
 
-	this.config = config || {offsetX:40, offsetY:40, gridX: 200, gridY: 50, paddingX: 20, paddingY: 20};
+	this.config = config || {offsetX: 40, offsetY: 40, gridX: 200, gridY: 50, paddingX: 20, paddingY: 20};
 }
 
 MindMapGraphic.prototype = {
 	init: function (model) {
 		var root = this.createNode(model.rootNode, null);
+
+
 	},
 
 	createNode: function (model, parent) {
@@ -63,18 +65,18 @@ function MindMapNodeGraphic(model, parent, graphic) {
 	this.parent = parent;
 	this.graphic = graphic;
 
-	this.rect = null;
+	this.group = null;
+	this.box = null;
+	this.textbox = null;
 	this.connection = null;
 
 	this.expanded = false;
 
-	model.measure();
-	model.position();
 	this.init();
 }
 
 MindMapNodeGraphic.prototype = {
-	measure: function() {
+	measure: function () {
 		var config = this.graphic.config;
 
 		this.width = config.gridX;
@@ -84,32 +86,46 @@ MindMapNodeGraphic.prototype = {
 		this.top = config.offsetY + (this.model.top + this.model.height / 2 - 1) * (config.gridY + config.paddingY);
 	},
 
-	position: function() {
+	position: function () {
+		if (this.parent) {
+			this.x = this.parent.left + this.graphic.config.gridX;
+			this.y = this.parent.top + this.graphic.config.gridY / 2;
+			this.zx = this.left;
+			this.zy = this.top + this.graphic.config.gridY / 2;
 
+			this.ax = this.x * 0.4 + this.zx * 0.6;
+			this.ay = this.y;
+			this.bx = this.x * 0.6 + this.zx * 0.4;
+			this.by = this.zy;
+		}
 	},
 
 	init: function () {
+		this.model.measure();
+		this.model.position();
+
 		this.measure();
 		this.position();
 
 		var config = this.graphic.config;
 
-		this.rect = this.graphic.paper.rect(this.left, this.top, this.width, this.height, 10);
+		var group = this.graphic.paper.set();
+		var box = this.graphic.paper.rect(this.left, this.top, this.width, this.height, 10);
+		var textbox = this.graphic.paper.text(this.left + 30, this.top + 20, this.model.data.label).attr({fill: Raphael.getColor()});
+		group.push(box);
+		group.push(textbox);
+		group.translate(0, 0);
+
+		this.group = group;
+		this.box = box;
+		this.textbox = textbox;
 
 		if (this.parent) {
-			var x = this.parent.left + config.gridX;
-			var y = this.parent.top + config.gridY / 2;
-			var zx = this.left;
-			var zy = this.top + config.gridY / 2;
-
-			var ax = x * 0.4 + zx * 0.6;
-			var ay = y;
-			var bx = x * 0.6 + zx * 0.4;
-			var by = zy;
-
-			var path = [["M", x, y], ["C", ax, ay, bx, by, zx, zy]];
+			var path = [
+				["M", this.x, this.y],
+				["C", this.ax, this.ay, this.bx, this.by, this.zx, this.zy]
+			];
 			this.connection = this.graphic.paper.path(path).attr({stroke: Raphael.getColor(), "stroke-width": 2, "stroke-linecap": "round"});
-
 		}
 	},
 
@@ -131,7 +147,7 @@ MindMapNodeGraphic.prototype = {
 };
 
 function MindMapModel() {
-	this.rootNode = new MindMapNodeModel({text: "Root"}, null, this);
+	this.rootNode = new MindMapNodeModel({label: "Root"}, null, this);
 	this.allNodes = [];
 
 	this.eventMap = [];
@@ -254,7 +270,7 @@ MindMapNodeModel.prototype = {
 		}
 	},
 
-	position: function() {
+	position: function () {
 		var height = 0;
 		for (var i = 0; i < this.children.length; i++) {
 			this.children[i].top = this.top + height;
@@ -264,7 +280,6 @@ MindMapNodeModel.prototype = {
 };
 
 window.onload = function () {
-
 	var mindmap = new MindMap(document.getElementById("mindmapDiv"));
 	mindmap.loadData([
 		{
@@ -274,7 +289,23 @@ window.onload = function () {
 					label: "Nanjing"
 				},
 				{
-					label: "Suzhou"
+					label: "Suzhou",
+					children: [
+						{
+							label: "Taicang"
+						},
+						{
+							label: "Wujiang"
+						}
+					]
+				},
+				{
+					label: "Nantong",
+					children: [
+						{
+							label: "Haian"
+						}
+					]
 				}
 			]
 		},
