@@ -37,7 +37,7 @@ function MindMapGraphic(container, config) {
 
 	this.paper = new Raphael(container, 3000, 3000);
 
-	this.config = config || {offsetX: 60, offsetY: 60, gridX: 200, gridY: 50, paddingX: 40, paddingY: 50};
+	this.config = config || {offsetX: 60, offsetY: 60, gridX: 200, gridY: 50, paddingX: 40, paddingY: 20};
 }
 
 MindMapGraphic.prototype = {
@@ -45,23 +45,25 @@ MindMapGraphic.prototype = {
 		this.rootNode = this.createNode(model.rootNode);
 	},
 
-	createNode: function (model) {
-		var parent;
-		for (var i=0; i<this.allNodes.length; i++) {
-			if (this.allNodes[i].model === model.parent) {
-				parent = this.allNodes[i];
-				break;
+	createNode: function (model, parent) {
+		if (!parent) {
+			for (var i = 0; i < this.allNodes.length; i++) {
+				if (this.allNodes[i].model === model.parent) {
+					parent = this.allNodes[i];
+					break;
+				}
 			}
 		}
 
 		var nodeGraphic = new MindMapNodeGraphic(model, parent, this);
 		this.allNodes.push(nodeGraphic);
 
+		if (parent) {
+			parent.childNodes.push(nodeGraphic);
+		}
+
 		for (var i = 0; i < model.children.length; i++) {
 			var child = this.createNode(model.children[i], nodeGraphic);
-			if (parent) {
-				parent.childNodes.push(child);
-			}
 		}
 		return nodeGraphic;
 	},
@@ -156,9 +158,9 @@ MindMapNodeGraphic.prototype = {
 		this.bindEvents();
 	},
 
-	bindEvents: function() {
+	bindEvents: function () {
 		var that = this;
-		this.group.click(function() {
+		this.group.click(function () {
 			that.graphic.selectNode(that);
 		});
 	},
@@ -180,37 +182,37 @@ MindMapNodeGraphic.prototype = {
 
 		var config = this.graphic.config;
 
-		this.box.attr({x: this.left, y:this.top, width:this.width, height: this.height});
-		this.textbox.attr({x: this.left + 30, y:this.top + 20, text:this.top});
+		this.box.attr({x: this.left, y: this.top, width: this.width, height: this.height});
+		this.textbox.attr({x: this.left + 30, y: this.top + 20});
+
+		if (this.adder) {
+			this.adder.attr({x: this.left + this.width, y: this.top + this.height + 10});
+		}
 
 		if (this.connection) {
 			var path = [
 				["M", this.x, this.y],
 				["C", this.ax, this.ay, this.bx, this.by, this.zx, this.zy]
 			];
-			this.connection.attr({path:path});
+			this.connection.attr({path: path});
 		}
 
-		for (var i=0; i<this.childNodes.length; i++) {
+		for (var i = 0; i < this.childNodes.length; i++) {
 			this.childNodes[i].refresh();
 		}
 	},
 
-	refreshLine: function () {
-		//this.connection.
-	},
-
-	select: function() {
+	select: function () {
 		this.box.attr({
 			stroke: "Red"
 		});
 
 		if (!this.adder) {
-			this.adder = this.graphic.paper.text(this.left + this.width, this.top + this.height + 20, "+");
+			this.adder = this.graphic.paper.text(this.left + this.width, this.top + this.height + 10, "+");
 
 			var that = this;
-			this.adder.click(function() {
-				that.model.addChild({label:"New Node"}, true);
+			this.adder.click(function () {
+				that.model.addChild({label: that.model.data.label + that.model.children.length}, true);
 			});
 		}
 		else {
@@ -218,7 +220,7 @@ MindMapNodeGraphic.prototype = {
 		}
 	},
 
-	unselect: function() {
+	unselect: function () {
 		this.box.attr({
 			stroke: "Black"
 		});
@@ -297,17 +299,19 @@ MindMapNodeModel.prototype = {
 		this.children.push(node);
 		this.mindmap.allNodes.push(node);
 
-		if (needEvent) {
-			var event = {type: "add", node: node};
-			this.mindmap.fire(event);
-		}
-
 		if (data.children) {
 			for (var i = 0; i < data.children.length; i++) {
 				node.addChild(data.children[i], needEvent);
 			}
 		}
-	},
+
+		this.measure();
+		this.position();
+
+		if (needEvent) {
+			var event = {type: "add", node: node};
+			this.mindmap.fire(event);
+		}},
 
 	removeChild: function (node) {
 		for (var i = 0; i < this.children.length; i++) {
