@@ -1,4 +1,4 @@
-mindmap
+sn chart
 =======
 
-a tiny mind map
+放点乱七八糟的代码
