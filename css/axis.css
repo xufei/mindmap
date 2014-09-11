@@ -1,0 +1,72 @@
+.grid-line {
+	stroke: lightgrey;
+	stroke-width: 1;
+}
+
+.axis-line-x {
+	stroke: black;
+	stroke-width: 2;
+	stroke-linecap: round;
+}
+
+.axis-line-y {
+	stroke: black;
+	stroke-width: 2;
+	stroke-linecap: round;
+}
+
+.axis-line-y2 {
+	stroke: black;
+	stroke-width: 2;
+	stroke-linecap: round;
+}
+
+.axis-mark-main {
+	stroke: black;
+	stroke-width: 1;
+}
+
+.axis-mark-second {
+	stroke: black;
+	stroke-width: 1;
+}
+
+.axis-title-x {
+	font-size: 18px;
+}
+
+.axis-number-x {
+	font-size: 15px;
+}
+
+.axis-title-y {
+	font-size: 18px;
+}
+
+.axis-number-y {
+	font-size: 15px;
+}
+
+
+.series-areas-general {
+	stroke-width: 0;
+}
+
+.series1 {
+	fill: rgb(0, 0, 255);
+}
+
+.series2 {
+	fill: rgb(0, 192, 0);
+}
+
+.legend-box {
+	stroke: black;
+	stroke-width: 1;
+	fill: white;
+}
+
+.legend-text {
+	font-size: 15px;
+	text-anchor: start;
+}
