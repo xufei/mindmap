@@ -2,6 +2,9 @@ angular.module("ng-charts").controller("PieController", ["$scope", function ($sc
 	$scope.width = 640;
 	$scope.height = 480;
 
+	$scope.offsetX = 0;
+	$scope.offsetY = 0;
+
 	$scope.radius = 200;
 
 	$scope.pieData = [
@@ -31,9 +34,18 @@ angular.module("ng-charts").controller("PieController", ["$scope", function ($sc
 		return "series" + index;
 	};
 
+	$scope.chartTransform = function() {
+		return "scale(1, -1) translate("
+			+ ($scope.offsetX + $scope.radius)
+			+ ", "
+			+ (-$scope.offsetY - $scope.radius) + ")";
+	};
+
+	$scope.legendTransform = function() {
+		return "translate(" + ($scope.offsetX + 2 * $scope.radius + 10) + ", 50)";
+	};
+
 	$scope.path = function (index) {
-		var x = 200;
-		var y = 200;
 		var rx = $scope.radius;
 		var ry = $scope.radius;
 
@@ -65,9 +77,9 @@ angular.module("ng-charts").controller("PieController", ["$scope", function ($sc
 			e3y = ry * Math.sin(stop);
 		}
 
-		var path = "M" + x + "," + y + " " + (x + e1x) + "," + (y + e1y) +
-			"A" + rx + "," + ry + " 1 0,1 " + (x + e2x) + "," + (y + e2y) +
-			"A" + rx + "," + ry + " 1 0,1 " + (x + e3x) + "," + (y + e3y) + "z";
+		var path = "M 0, 0 " + e1x + "," + e1y +
+			"A" + rx + "," + ry + " 1 0,1 " + e2x + "," + e2y +
+			"A" + rx + "," + ry + " 1 0,1 " + e3x + "," + e3y + "z";
 		return path;
 	};
 }]);

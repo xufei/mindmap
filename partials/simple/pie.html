@@ -1,25 +1,29 @@
 <div ng-cloak ng-controller="PieController">
 	<input type="number" ng-model="radius"/>
+	<input type="number" ng-model="offsetX"/>
+	<input type="number" ng-model="offsetY"/>
 
-	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="800" height="600">
-		<title>用AngularJS做图表</title>
-		<desc>用AngularJS生成的图表</desc>
+	<div>
+		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="{{width}}" height="{{height}}">
+			<title>用AngularJS做图表</title>
+			<desc>用AngularJS生成的图表</desc>
 
-		<!--背景-->
-		<rect x="0" y="0" width="800" height="600" stroke-width="1" stroke="none" fill="white"/>
+			<!--背景-->
+			<rect x="0" y="0" width="{{width}}" height="{{height}}" stroke-width="1" stroke="none" fill="white"/>
 
-		<!--饼图-->
-		<g transform="scale(1, -1) translate(12, -412)">
-			<path ng-repeat="data in pieData" ng-class="pieClass($index)" d="{{path($index)}}"/>
-		</g>
+			<!--饼图-->
+			<g transform="{{chartTransform()}}">
+				<path ng-repeat="data in pieData" ng-class="pieClass($index)" d="{{path($index)}}"/>
+			</g>
 
-		<!--图例-->
-		<g id="legend" transform="translate(427, 52)">
-			<rect class="legend-box" x="0" y="0" width="123" height="117"/>
+			<!--图例-->
+			<g id="legend" transform="{{legendTransform()}}">
+				<rect class="legend-box" x="0" y="0" width="123" height="117"/>
 
-			<rect ng-repeat-start="data in pieData" ng-class="pieClass($index)" transform="scale(1, -1)" x="6" y="{{-21 - 21*$index}}"
-			      width="30" height="15"/>
-			<text ng-repeat-end class="legend-text" x="42" y="{{21 + 21*$index}}">{{data.title}}</text>
-		</g>
-	</svg>
+				<rect ng-repeat-start="data in pieData" ng-class="pieClass($index)" transform="scale(1, -1)" x="6" y="{{-21 - 21*$index}}"
+				      width="30" height="15"/>
+				<text ng-repeat-end class="legend-text" x="42" y="{{21 + 21*$index}}">{{data.title}}</text>
+			</g>
+		</svg>
+	</div>
 </div>
