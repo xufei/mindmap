@@ -3,6 +3,13 @@
 	<input type="number" ng-model="offsetX"/>
 	<input type="number" ng-model="offsetY"/>
 
+	<ul>
+		<li ng-repeat="data in pieData">
+			{{data.title}}
+			<input type="number" ng-model="data.value"/>
+		</li>
+	</ul>
+
 	<div>
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="{{width}}" height="{{height}}">
 			<title>用AngularJS做图表</title>

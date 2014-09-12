@@ -18,7 +18,7 @@ angular.module("ng-charts").controller("PieController", ["$scope", function ($sc
 	var total;
 	var position = [];
 
-	function init() {
+	$scope.$watch("pieData", function() {
 		total = 0;
 		position = [];
 
@@ -26,9 +26,7 @@ angular.module("ng-charts").controller("PieController", ["$scope", function ($sc
 			total += $scope.pieData[i].value;
 			position.push(total);
 		}
-	}
-
-	init();
+	}, true);
 
 	$scope.pieClass = function (index) {
 		return "series" + index;
