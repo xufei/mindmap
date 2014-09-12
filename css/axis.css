@@ -1,3 +1,45 @@
+
+/* color series */
+.series0 {
+	fill:   rgb(255, 127, 80);
+}
+
+.series1 {
+	fill:   rgb(135, 206, 250);
+}
+
+.series2 {
+	fill:   rgb(218, 112, 214);
+}
+
+.series3 {
+	fill:   rgb(50, 205, 50);
+}
+
+.series4 {
+	fill:   rgb(100, 145, 237);
+}
+
+.series5 {
+	fill:   rgb(255, 105, 180);
+}
+
+.series6 {
+	fill:   rgb(186, 85, 211);
+}
+
+.series7 {
+	fill:   rgb(205, 92, 92);
+}
+
+.series8 {
+	fill:   rgb(255, 165, 0);
+}
+
+.series9 {
+	fill:   rgb(64, 224, 208);
+}
+
 .grid-line {
 	stroke: lightgrey;
 	stroke-width: 1;
@@ -52,13 +94,6 @@
 	stroke-width: 0;
 }
 
-.series1 {
-	fill: rgb(0, 0, 255);
-}
-
-.series2 {
-	fill: rgb(0, 192, 0);
-}
 
 .legend-box {
 	stroke: black;
