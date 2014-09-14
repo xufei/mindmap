@@ -6,11 +6,54 @@
 	<link rel="stylesheet" href="css/axis.css"/>
 	<script type="text/javascript" src="libs/angular.min.js"></script>
 	<script type="text/javascript" src="scripts/main.js"></script>
+    <script type="text/javascript" src="scripts/demo/demo.js"></script>
     <script type="text/javascript" src="scripts/controllers/simple/pie.js"></script>
 	<script type="text/javascript" src="scripts/controllers/simple/bar.js"></script>
 </head>
 <body ng-app="ng-charts">
-	<div ng-include="'partials/simple/pie.html'"></div>
-	<div ng-include="'partials/simple/bar.html'"></div>
+    <div ng-controller="DemoController">
+        <dl>
+            <dd>左偏移</dd>
+            <dt>
+                <input type="number" ng-model="offsetX"/>
+            </dt>
+            <dd>右偏移</dd>
+            <dt>
+                <input type="number" ng-model="offsetY"/>
+            </dt>
+            <dd>饼图半径</dd>
+            <dt>
+                <input type="number" ng-model="radius"/>
+            </dt>
+            <dd>柱状图横距</dd>
+            <dt>
+                <input type="number" ng-model="gridX"/>
+            </dt>
+            <dd>柱状图纵距</dd>
+            <dt>
+                <input type="number" ng-model="gridY"/>
+            </dt>
+            <dd>柱状图列宽</dd>
+            <dt>
+                <input type="number" ng-model="columnWidth"/>
+            </dt>
+        </dl>
+
+        <ul>
+            <li ng-repeat="data in data">
+                {{data.title}}
+                <input type="number" ng-model="data.value"/>
+            </li>
+            <li>
+                在这里加一条数据吧：
+                <input type="number" ng-model="newValue"/>
+                <button ng-click="addItem()">添加</button>
+            </li>
+        </ul>
+
+
+        <div ng-include="'partials/simple/pie.html'"></div>
+        <div ng-include="'partials/simple/bar.html'"></div>
+    </div>
 </body>
 </html>

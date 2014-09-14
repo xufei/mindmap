@@ -1,32 +1,23 @@
 angular.module("ng-charts").controller("PieController", ["$scope", function ($scope) {
-	$scope.width = 640;
-	$scope.height = 480;
-
-	$scope.offsetX = 0;
-	$scope.offsetY = 0;
-
-	$scope.radius = 200;
-
-	$scope.pieData = [
-		{title: "Test 1", value: 8},
-		{title: "Test 2", value: 2},
-		{title: "Test 3", value: 6},
-		{title: "Test 4", value: 2},
-		{title: "Test 5", value: 8}
-	];
-
 	var total;
 	var position = [];
 
-	$scope.$watch("pieData", function() {
+	$scope.$watch("data", function() {
 		total = 0;
 		position = [];
 
-		for (var i = 0; i < $scope.pieData.length; i++) {
-			total += $scope.pieData[i].value;
+		for (var i = 0; i < $scope.data.length; i++) {
+			total += $scope.data[i].value;
 			position.push(total);
 		}
 	}, true);
+
+    $scope.width = function() {
+    };
+
+    $scope.height = function() {
+
+    };
 
 	$scope.pieClass = function (index) {
 		return "series" + index;
