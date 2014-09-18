@@ -21,13 +21,13 @@ angular.module("ng-charts").controller("BarController", ["$scope", function ($sc
 
     $scope.chartTransform = function() {
         return "scale(1, -1) translate("
-            + ($scope.offsetX)
+            + ($scope.offsetX + $scope.axisX)
             + ", "
-            + (-$scope.offsetY - 350) + ")";
+            + (-$scope.offsetY - $scope.axisY) + ")";
     };
 
     $scope.legendTransform = function() {
-        return "translate(" + ($scope.gridX * $scope.data.length + 10) + ", 50)";
+        return "translate(" + ($scope.offsetX + $scope.axisX + $scope.gridX * $scope.data.length + 10) + ", 50)";
     };
 
     $scope.barClass = function (index) {

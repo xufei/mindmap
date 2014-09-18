@@ -9,16 +9,21 @@
     <defs>
         <!--纵坐标的对齐线-->
         <pattern id="y-grid-line" x="0" y="0" height="{{gridY}}" width="100%" patternUnits="userSpaceOnUse">
-            <line x1="0" y1="0" x2="500" y2="0" class="grid-line"/>
+            <line x1="0" y1="0" x2="{{gridX * data.length}}" y2="0" class="grid-line"/>
         </pattern>
     </defs>
 
     <g transform="{{chartTransform()}}">
-        <rect x="0" y="0" width="600" height="480" fill="url(#y-grid-line)"/>
+        <rect x="0" y="0" width="{{gridX * data.length}}" height="480" fill="url(#y-grid-line)"/>
     </g>
 
     <!--坐标刻度线-->
     <defs>
+	    <!--横坐标的刻度线-->
+	    <pattern id="x-axis-mark" x="0" width="{{gridX}}" height="6" patternUnits="userSpaceOnUse">
+		    <line x1="0" y1="0" x2="0" y2="6" class="axis-mark-main"/>
+	    </pattern>
+
         <!--纵坐标的刻度线-->
         <pattern id="y-axis-mark" y="0" width="6" height="{{gridY}}" patternUnits="userSpaceOnUse">
             <line x1="-1" y1="0" x2="6" y2="0" class="axis-mark-main"/>
@@ -26,21 +31,24 @@
     </defs>
 
     <g transform="{{chartTransform()}}">
+	    <rect x="0" y="-6" width="{{gridX * data.length + 5}}" height="6" fill="url(#x-axis-mark)"/>
         <rect x="-6" y="0" width="6" height="353.5" fill="url(#y-axis-mark)"/>
     </g>
 
     <!--坐标轴-->
-    <g transform="scale(1, -1) translate(54, -362)">
-        <line id="x-axis" x1="0" y1="0" x2="500" y2="0" class="axis-line-x"/>
+    <g transform="{{chartTransform()}}">
+        <line id="x-axis" x1="0" y1="0" x2="{{gridX * data.length}}" y2="0" class="axis-line-x"/>
         <line id="y-axis" x1="0" y1="0" x2="0" y2="350" class="axis-line-y"/>
     </g>
 
     <!--坐标刻度-->
-    <g class="axis-number-x" transform="translate(54, 383)" text-anchor="middle">
+    <g class="axis-number-x" text-anchor="middle"
+       transform="{{'translate(' + (offsetX + axisX + 4) + ',' + (offsetY + axisY + 20) + ')'}}">
         <text ng-repeat="mark in axis.x" x="{{gridX*$index}}">{{mark}}</text>
     </g>
 
-    <g class="axis-number-y" transform="translate(42, 367)" text-anchor="end">
+    <g class="axis-number-y" text-anchor="end"
+       transform="{{'translate(' + (offsetX + axisX -8) + ',' + (offsetY + axisY - 3) + ')'}}">
         <text ng-repeat="mark in axis.y" y="{{-gridY*$index}}">{{mark}}</text>
     </g>
 

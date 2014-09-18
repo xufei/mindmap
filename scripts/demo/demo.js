@@ -9,6 +9,9 @@ angular.module("ng-charts").controller("DemoController", ["$scope", function ($s
     $scope.gridY = 40;
     $scope.columnWidth = 30;
 
+	$scope.axisX = 50;
+	$scope.axisY = 360;
+
     $scope.radius = 200;
 
     $scope.newValue = 1;
