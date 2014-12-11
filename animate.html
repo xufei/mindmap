@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://cdn.bootcss.com/angular.js/1.2.16/angular.min.js"></script>
+
+    <script>
+        angular.module("ng-charts", []).controller("AnimateController", ["$scope", "$timeout", function ($scope, $timeout) {
+            $scope.items = [];
+
+            var counter = 0;
+
+            function addItem() {
+                var newItem = Math.ceil(100 * (1 + Math.sin((counter++) * Math.PI / 180)));
+
+                if ($scope.items.length > 500) {
+                    $scope.items.splice(0, 1);
+                }
+
+                $scope.items.push(newItem);
+
+                $timeout(function () {
+                    addItem();
+                }, 5);
+            }
+
+            addItem();
+
+            $scope.path = function() {
+                var path = "";
+
+                for (var i=0; i<$scope.items.length; i++) {
+                    path += 2*i + "," + $scope.items[i] + " ";
+                }
+
+                return path;
+            };
+        }]);
+    </script>
+</head>
+<body ng-app="ng-charts">
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1000" height="400" ng-controller="AnimateController">
+    <desc>Created with Highcharts 4.0.3</desc>
+    <defs>
+        <clipPath id="highcharts-1">
+            <rect x="0" y="0" width="914" height="317"></rect>
+        </clipPath>
+    </defs>
+    <rect x="0" y="0" width="1000" height="400" strokeWidth="0" fill="#FFFFFF" class=" highcharts-background"></rect>
+    <path fill="none" d="M 76 363.5 L 990 363.5" stroke="#808080" stroke-width="1"></path>
+    <path fill="rgba(124,181,236,0.25)" d="M 0 0"></path>
+    <g class="highcharts-grid" zIndex="1"></g>
+    <g class="highcharts-grid" zIndex="1">
+        <path fill="none" d="M 76 109.5 L 990 109.5" stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
+        <path fill="none" d="M 76 363.5 L 990 363.5" stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
+        <path fill="none" d="M 76 45.5 L 990 45.5" stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
+        <path fill="none" d="M 76 173.5 L 990 173.5" stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
+        <path fill="none" d="M 76 236.5 L 990 236.5" stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
+        <path fill="none" d="M 76 300.5 L 990 300.5" stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
+    </g>
+    <g class="highcharts-axis" zIndex="2">
+        <path fill="none" d="M 44.1493068706546 363 L 44.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="0.013815039801161721"></path>
+        <path fill="none" d="M 138.14930687065458 363 L 138.14930687065458 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="1"></path>
+        <path fill="none" d="M 232.14930687065458 363 L 232.14930687065458 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="1"></path>
+        <path fill="none" d="M 327.1493068706546 363 L 327.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="1"></path>
+        <path fill="none" d="M 421.1493068706546 363 L 421.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="1"></path>
+        <path fill="none" d="M 515.1493068706546 363 L 515.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="1"></path>
+        <path fill="none" d="M 609.1493068706546 363 L 609.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="1"></path>
+        <path fill="none" d="M 703.1493068706546 363 L 703.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="1"></path>
+        <path fill="none" d="M 798.1493068706546 363 L 798.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="1"></path>
+        <path fill="none" d="M 892.1493068706546 363 L 892.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="1"></path>
+        <path fill="none" d="M 986.1493068706546 363 L 986.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="0.9875664641789544"></path>
+        <path fill="none" d="M 76 363.5 L 990 363.5" stroke="#C0D0E0" stroke-width="1" zIndex="7"
+              visibility="visible"></path>
+    </g>
+    <g class="highcharts-axis" zIndex="2">
+        <text x="24.4375" zIndex="7" text-anchor="middle" transform="translate(0,0) rotate(270 24.4375 204.5)"
+              class=" highcharts-yaxis-title" style="color:#707070;fill:#707070;" visibility="visible" y="204.5">Value
+        </text>
+    </g>
+    <g class="highcharts-series-group" zIndex="3">
+        <g class="highcharts-series" visibility="visible" zIndex="0.1" transform="translate(76,46) scale(1 1)"
+           clip-path="url(#highcharts-1)">
+
+            <polyline style="fill:transparent;stroke:#7cb5ec;stroke-width:2"
+                  ng-attr-points="{{path()}}"></polyline>
+        </g>
+    </g>
+    <text x="500" text-anchor="middle" class="highcharts-title" zIndex="4"
+          style="color:#333333;font-size:18px;fill:#333333;width:936px;" y="25">
+        <tspan>Live random data</tspan>
+    </text>
+    <g class="highcharts-axis-labels highcharts-xaxis-labels" zIndex="7">
+        <text x="44.53875619364092" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="0.013815039801161721">
+            16:08:12
+        </text>
+        <text x="138.74380584402797" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:14
+        </text>
+        <text x="232.948855494415" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:16
+        </text>
+        <text x="327.1539051448021" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:18
+        </text>
+        <text x="421.3589547951891" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:20
+        </text>
+        <text x="515.5640044455762" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:22
+        </text>
+        <text x="609.7690540959633" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:24
+        </text>
+        <text x="703.9741037463502" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:26
+        </text>
+        <text x="798.1791533967373" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:28
+        </text>
+        <text x="892.3842030471244" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:30
+        </text>
+        <text x="974.2615672079838" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="0.9875664641789544">
+            16:08:32
+        </text>
+    </g>
+    <g class="highcharts-axis-labels highcharts-yaxis-labels" zIndex="7">
+        <text x="61" text-anchor="end" style="width:310px;color:#606060;cursor:default;font-size:11px;fill:#606060;"
+              y="368.9296875" opacity="1">0
+        </text>
+        <text x="61" text-anchor="end" style="width:310px;color:#606060;cursor:default;font-size:11px;fill:#606060;"
+              y="115.3296875" opacity="1">1
+        </text>
+        <text x="61" text-anchor="end" style="width:310px;color:#606060;cursor:default;font-size:11px;fill:#606060;"
+              y="305.5296875" opacity="1">0.25
+        </text>
+        <text x="61" text-anchor="end" style="width:310px;color:#606060;cursor:default;font-size:11px;fill:#606060;"
+              y="242.1296875" opacity="1">0.5
+        </text>
+        <text x="61" text-anchor="end" style="width:310px;color:#606060;cursor:default;font-size:11px;fill:#606060;"
+              y="178.7296875" opacity="1">0.75
+        </text>
+        <text x="61" text-anchor="end" style="width:310px;color:#606060;cursor:default;font-size:11px;fill:#606060;"
+              y="51.9296875" opacity="1">1.25
+        </text>
+    </g>
+    <g class="highcharts-tooltip" zIndex="8" style="cursor:default;padding:0;white-space:nowrap;"
+       transform="translate(764,181)" opacity="0" visibility="hidden">
+        <path fill="none"
+              d="M 3.5 0.5 L 145.5 0.5 C 148.5 0.5 148.5 0.5 148.5 3.5 L 148.5 59.5 C 148.5 62.5 148.5 62.5 145.5 62.5 L 80.5 62.5 74.5 68.5 68.5 62.5 3.5 62.5 C 0.5 62.5 0.5 62.5 0.5 59.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+              isShadow="true" stroke="black" stroke-opacity="0.049999999999999996" stroke-width="5"
+              transform="translate(1, 1)" width="148" height="62"></path>
+        <path fill="none"
+              d="M 3.5 0.5 L 145.5 0.5 C 148.5 0.5 148.5 0.5 148.5 3.5 L 148.5 59.5 C 148.5 62.5 148.5 62.5 145.5 62.5 L 80.5 62.5 74.5 68.5 68.5 62.5 3.5 62.5 C 0.5 62.5 0.5 62.5 0.5 59.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+              isShadow="true" stroke="black" stroke-opacity="0.09999999999999999" stroke-width="3"
+              transform="translate(1, 1)" width="148" height="62"></path>
+        <path fill="none"
+              d="M 3.5 0.5 L 145.5 0.5 C 148.5 0.5 148.5 0.5 148.5 3.5 L 148.5 59.5 C 148.5 62.5 148.5 62.5 145.5 62.5 L 80.5 62.5 74.5 68.5 68.5 62.5 3.5 62.5 C 0.5 62.5 0.5 62.5 0.5 59.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+              isShadow="true" stroke="black" stroke-opacity="0.15" stroke-width="1" transform="translate(1, 1)"
+              width="148" height="62"></path>
+        <path fill="rgba(249, 249, 249, .85)"
+              d="M 3.5 0.5 L 145.5 0.5 C 148.5 0.5 148.5 0.5 148.5 3.5 L 148.5 59.5 C 148.5 62.5 148.5 62.5 145.5 62.5 L 80.5 62.5 74.5 68.5 68.5 62.5 3.5 62.5 C 0.5 62.5 0.5 62.5 0.5 59.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+              stroke="#7cb5ec" stroke-width="1"></path>
+        <text x="8" zIndex="1" style="font-size:12px;color:#333333;fill:#333333;" y="21">
+            <tspan style="font-weight:bold">Random data</tspan>
+            <tspan x="8" dy="16">2014-12-11 16:07:51</tspan>
+            <tspan x="8" dy="16">0.24</tspan>
+        </text>
+    </g>
+</svg>
+
+</body>
+</html>
