@@ -1,74 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
     <meta charset="UTF-8">
     <title></title>
-    <script src="http://cdn.bootcss.com/angular.js/1.2.16/angular.min.js"></script>
+    <script src="libs/angular.min.js"></script>
 
-    <script>
-        angular.module("ng-charts", []).controller("AnimateController", ["$scope", "$timeout", function ($scope, $timeout) {
-            $scope.items1 = [];
-            $scope.items2 = [];
-
-            var counter = 0;
-
-            var start1 = 160;
-            var start2 = 180;
-
-            function addItem() {
-                var newItem1 = start1 + 10 * Math.random() - 5;
-                var newItem2 = start2 + 12 * Math.random() - 6;
-
-                start1 = newItem1;
-                start2 = newItem2;
-
-                if ($scope.items1.length > 500) {
-                    $scope.items1.splice(0, 1);
-                    $scope.items2.splice(0, 1);
-                }
-
-                $scope.items1.push(newItem1);
-                $scope.items2.push(newItem2);
-
-                $timeout(function () {
-                    addItem();
-                }, 5);
-            }
-
-            addItem();
-
-            $scope.path1 = function() {
-                var path = "";
-
-                for (var i=0; i<$scope.items1.length; i++) {
-                    path += i + "," + $scope.items1[i] + " ";
-                }
-
-                return path;
-            };
-
-            $scope.path2 = function() {
-                var path = "";
-
-                for (var i=0; i<$scope.items2.length; i++) {
-                    path += i + "," + $scope.items2[i] + " ";
-                }
-
-                return path;
-            };
-        }]);
-    </script>
+    <script src="scripts/demo/animate.js"></script>
 </head>
 <body ng-app="ng-charts">
 
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1000" height="400" ng-controller="AnimateController">
-    <desc>Created with Highcharts 4.0.3</desc>
+    <desc>ngCharts</desc>
     <defs>
         <clipPath id="highcharts-1">
             <rect x="0" y="0" width="914" height="317"></rect>
         </clipPath>
     </defs>
-    <rect x="0" y="0" width="1000" height="400" strokeWidth="0" fill="#FFFFFF" class=" highcharts-background"></rect>
+    <rect x="0" y="0" width="1000" height="400" strokeWidth="0" fill="#FFFFFF" class="highcharts-background"></rect>
     <path fill="none" d="M 76 363.5 L 990 363.5" stroke="#808080" stroke-width="1"></path>
     <path fill="rgba(124,181,236,0.25)" d="M 0 0"></path>
     <g class="highcharts-grid" zIndex="1"></g>
@@ -124,7 +72,7 @@
     </g>
     <text x="500" text-anchor="middle" class="highcharts-title" zIndex="4"
           style="color:#333333;font-size:18px;fill:#333333;width:936px;" y="25">
-        <tspan>Live random data</tspan>
+        <tspan>Test</tspan>
     </text>
     <g class="highcharts-axis-labels highcharts-xaxis-labels" zIndex="7">
         <text x="44.53875619364092" text-anchor="middle"
