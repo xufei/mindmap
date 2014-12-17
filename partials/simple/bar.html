@@ -8,7 +8,7 @@
     <rect x="0" y="0" width="1000" height="400" strokeWidth="0" fill="#FFFFFF" class="highcharts-background"></rect>
 
 
-    <path fill="none" d="M 76 363.5 L 990 363.5" stroke="#808080" stroke-width="1"></path>
+    <path fill="none" ng-attr-d="{{chart.xAxisPath}}" stroke="#808080" strok-width="4"></path>
     <path fill="rgba(124,181,236,0.25)" d="M 0 0"></path>
 
     <g class="highcharts-grid" zIndex="1"></g>
@@ -19,30 +19,8 @@
     </g>
 
     <g class="highcharts-axis" zIndex="2">
-        <path fill="none" d="M 44.1493068706546 363 L 44.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
-              opacity="0.013815039801161721"></path>
-        <path fill="none" d="M 138.14930687065458 363 L 138.14930687065458 373" stroke="#C0D0E0" stroke-width="1"
+        <path ng-repeat="axis in chart.xAxis" fill="none" ng-attr-d="{{axis.path}}" stroke="#C0D0E0" stroke-width="1"
               opacity="1"></path>
-        <path fill="none" d="M 232.14930687065458 363 L 232.14930687065458 373" stroke="#C0D0E0" stroke-width="1"
-              opacity="1"></path>
-        <path fill="none" d="M 327.1493068706546 363 L 327.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
-              opacity="1"></path>
-        <path fill="none" d="M 421.1493068706546 363 L 421.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
-              opacity="1"></path>
-        <path fill="none" d="M 515.1493068706546 363 L 515.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
-              opacity="1"></path>
-        <path fill="none" d="M 609.1493068706546 363 L 609.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
-              opacity="1"></path>
-        <path fill="none" d="M 703.1493068706546 363 L 703.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
-              opacity="1"></path>
-        <path fill="none" d="M 798.1493068706546 363 L 798.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
-              opacity="1"></path>
-        <path fill="none" d="M 892.1493068706546 363 L 892.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
-              opacity="1"></path>
-        <path fill="none" d="M 986.1493068706546 363 L 986.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
-              opacity="0.9875664641789544"></path>
-        <path fill="none" d="M 76 363.5 L 990 363.5" stroke="#C0D0E0" stroke-width="1" zIndex="7"
-              visibility="visible"></path>
     </g>
     <g class="highcharts-axis" zIndex="2">
         <text x="24.4375" zIndex="7" text-anchor="middle" transform="translate(0,0) rotate(270 24.4375 204.5)"
@@ -65,40 +43,9 @@
         <tspan>Test</tspan>
     </text>
     <g class="highcharts-axis-labels highcharts-xaxis-labels" zIndex="7">
-        <text x="44.53875619364092" text-anchor="middle"
-              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="0.013815039801161721">
-            16:08:12
-        </text>
-        <text x="138.74380584402797" text-anchor="middle"
-              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:14
-        </text>
-        <text x="232.948855494415" text-anchor="middle"
-              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:16
-        </text>
-        <text x="327.1539051448021" text-anchor="middle"
-              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:18
-        </text>
-        <text x="421.3589547951891" text-anchor="middle"
-              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:20
-        </text>
-        <text x="515.5640044455762" text-anchor="middle"
-              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:22
-        </text>
-        <text x="609.7690540959633" text-anchor="middle"
-              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:24
-        </text>
-        <text x="703.9741037463502" text-anchor="middle"
-              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:26
-        </text>
-        <text x="798.1791533967373" text-anchor="middle"
-              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:28
-        </text>
-        <text x="892.3842030471244" text-anchor="middle"
-              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:30
-        </text>
-        <text x="974.2615672079838" text-anchor="middle"
-              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="0.9875664641789544">
-            16:08:32
+        <text ng-repeat="axis in chart.xAxis" ng-attr-x="{{axis.x}}" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" ng-attr-y="{{chart.baseY}}" opacity="0.013815039801161721">
+            {{axis.number}}
         </text>
     </g>
     <g class="highcharts-axis-labels highcharts-yaxis-labels" zIndex="7">
