@@ -1,73 +1,133 @@
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="800" height="600" ng-controller="BarController">
-    <title>用AngularJS做图表</title>
-    <desc>用AngularJS生成的图表</desc>
-
-    <!--背景-->
-    <rect x="0" y="0" width="100%" height="100%" stroke-width="1" stroke="none" fill="white"/>
-
-    <!--坐标对齐线-->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1000" height="600" ng-controller="BarController">
+    <desc>ngCharts</desc>
     <defs>
-        <!--纵坐标的对齐线-->
-        <pattern id="y-grid-line" x="0" y="0" ng-attr-height="{{gridY}}" width="100%" patternUnits="userSpaceOnUse">
-            <line x1="0" y1="0" ng-attr-x2="{{gridX * data.length}}" y2="0" class="grid-line"/>
-        </pattern>
+        <clipPath id="highcharts-1">
+            <rect x="0" y="0" width="914" height="317"></rect>
+        </clipPath>
     </defs>
+    <rect x="0" y="0" width="1000" height="400" strokeWidth="0" fill="#FFFFFF" class="highcharts-background"></rect>
 
-    <g ng-attr-transform="{{chartTransform()}}">
-        <rect x="0" y="0" ng-attr-width="{{gridX * data.length}}" height="480" fill="url(#y-grid-line)"/>
+
+    <path fill="none" d="M 76 363.5 L 990 363.5" stroke="#808080" stroke-width="1"></path>
+    <path fill="rgba(124,181,236,0.25)" d="M 0 0"></path>
+
+    <g class="highcharts-grid" zIndex="1"></g>
+
+    <g class="highcharts-grid" zIndex="1">
+        <path ng-repeat="axis in chart.yAxis" ng-attr-d="{{axis.path}}"
+              fill="none" stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
     </g>
 
-    <!--坐标刻度线-->
-    <defs>
-	    <!--横坐标的刻度线-->
-	    <pattern id="x-axis-mark" x="0" ng-attr-width="{{gridX}}" height="6" patternUnits="userSpaceOnUse">
-		    <line x1="0" y1="0" x2="0" y2="6" class="axis-mark-main"/>
-	    </pattern>
-
-        <!--纵坐标的刻度线-->
-        <pattern id="y-axis-mark" y="0" width="6" ng-attr-height="{{gridY}}" patternUnits="userSpaceOnUse">
-            <line x1="-1" y1="0" x2="6" y2="0" class="axis-mark-main"/>
-        </pattern>
-    </defs>
-
-    <g ng-attr-transform="{{chartTransform()}}">
-	    <rect x="0" y="-6" ng-attr-width="{{gridX * data.length + 5}}" height="6" fill="url(#x-axis-mark)"/>
-        <rect x="-6" y="0" width="6" height="353.5" fill="url(#y-axis-mark)"/>
+    <g class="highcharts-axis" zIndex="2">
+        <path fill="none" d="M 44.1493068706546 363 L 44.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="0.013815039801161721"></path>
+        <path fill="none" d="M 138.14930687065458 363 L 138.14930687065458 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="1"></path>
+        <path fill="none" d="M 232.14930687065458 363 L 232.14930687065458 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="1"></path>
+        <path fill="none" d="M 327.1493068706546 363 L 327.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="1"></path>
+        <path fill="none" d="M 421.1493068706546 363 L 421.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="1"></path>
+        <path fill="none" d="M 515.1493068706546 363 L 515.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="1"></path>
+        <path fill="none" d="M 609.1493068706546 363 L 609.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="1"></path>
+        <path fill="none" d="M 703.1493068706546 363 L 703.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="1"></path>
+        <path fill="none" d="M 798.1493068706546 363 L 798.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="1"></path>
+        <path fill="none" d="M 892.1493068706546 363 L 892.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="1"></path>
+        <path fill="none" d="M 986.1493068706546 363 L 986.1493068706546 373" stroke="#C0D0E0" stroke-width="1"
+              opacity="0.9875664641789544"></path>
+        <path fill="none" d="M 76 363.5 L 990 363.5" stroke="#C0D0E0" stroke-width="1" zIndex="7"
+              visibility="visible"></path>
     </g>
-
-    <!--坐标轴-->
-    <g ng-attr-transform="{{chartTransform()}}">
-        <line id="x-axis" x1="0" y1="0" ng-attr-x2="{{gridX * data.length}}" y2="0" class="axis-line-x"/>
-        <line id="y-axis" x1="0" y1="0" x2="0" y2="350" class="axis-line-y"/>
+    <g class="highcharts-axis" zIndex="2">
+        <text x="24.4375" zIndex="7" text-anchor="middle" transform="translate(0,0) rotate(270 24.4375 204.5)"
+              class=" highcharts-yaxis-title" style="color:#707070;fill:#707070;" visibility="visible" y="204.5">Value
+        </text>
     </g>
+    <g class="highcharts-series-group" zIndex="3">
+        <g class="highcharts-series" visibility="visible" zIndex="0.1" transform="translate(76,46) scale(1 1)"
+           clip-path="url(#highcharts-1)">
 
-    <!--坐标刻度-->
-    <g class="axis-number-x" text-anchor="middle"
-       ng-attr-transform="{{'translate(' + (offsetX + axisX + 4) + ',' + (offsetY + axisY + 20) + ')'}}">
-        <text ng-repeat="mark in axis.x" ng-attr-x="{{gridX*$index}}">{{mark}}</text>
+            <polyline style="fill:transparent;stroke:#7cb5ec;stroke-width:2"
+                      ng-attr-points="{{path1()}}"></polyline>
+
+            <polyline style="fill:transparent;stroke:#7cb5ec;stroke-width:2"
+                      ng-attr-points="{{path2()}}"></polyline>
+        </g>
     </g>
-
-    <g class="axis-number-y" text-anchor="end"
-       ng-attr-transform="{{'translate(' + (offsetX + axisX -8) + ',' + (offsetY + axisY - 3) + ')'}}">
-        <text ng-repeat="mark in axis.y" ng-attr-y="{{-gridY*$index}}">{{mark}}</text>
+    <text x="500" text-anchor="middle" class="highcharts-title" zIndex="4"
+          style="color:#333333;font-size:18px;fill:#333333;width:936px;" y="25">
+        <tspan>Test</tspan>
+    </text>
+    <g class="highcharts-axis-labels highcharts-xaxis-labels" zIndex="7">
+        <text x="44.53875619364092" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="0.013815039801161721">
+            16:08:12
+        </text>
+        <text x="138.74380584402797" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:14
+        </text>
+        <text x="232.948855494415" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:16
+        </text>
+        <text x="327.1539051448021" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:18
+        </text>
+        <text x="421.3589547951891" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:20
+        </text>
+        <text x="515.5640044455762" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:22
+        </text>
+        <text x="609.7690540959633" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:24
+        </text>
+        <text x="703.9741037463502" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:26
+        </text>
+        <text x="798.1791533967373" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:28
+        </text>
+        <text x="892.3842030471244" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="1">16:08:30
+        </text>
+        <text x="974.2615672079838" text-anchor="middle"
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" y="384" opacity="0.9875664641789544">
+            16:08:32
+        </text>
     </g>
-
-    <!--柱子-->
-    <g ng-attr-transform="{{chartTransform()}}">
-        <rect ng-repeat="item in data"
-              ng-class="barClass($index)"
-              ng-attr-x="{{x($index)}}"
-              ng-attr-y="{{y($index)}}"
-              ng-attr-width="{{width($index)}}"
-              ng-attr-height="{{height($index)}}"/>
+    <g class="highcharts-axis-labels highcharts-yaxis-labels" zIndex="7">
+        <text ng-repeat="axis in chart.yAxis" ng-attr-y="{{axis.y}}"
+              x="40" text-anchor="end" style="width:310px;color:#606060;cursor:default;font-size:11px;fill:#606060;"opacity="1">
+            {{axis.number}}
+        </text>
     </g>
-
-    <!--图例-->
-    <g ng-attr-transform="{{legendTransform()}}">
-        <rect class="legend-box" x="0" y="0" width="150" ng-attr-height="{{20 + 21*data.length}}"/>
-
-        <rect ng-repeat-start="item in data" ng-class="barClass($index)" transform="scale(1, -1)"
-              x="5" ng-attr-y="{{-21 - 21*$index}}" width="30" height="15"/>
-        <text ng-repeat-end class="legend-text" x="40" ng-attr-y="{{21 + 21*$index}}">{{item.title}}</text>
+    <g class="highcharts-tooltip" zIndex="8" style="cursor:default;padding:0;white-space:nowrap;"
+       transform="translate(764,181)" opacity="0" visibility="hidden">
+        <path fill="none"
+              d="M 3.5 0.5 L 145.5 0.5 C 148.5 0.5 148.5 0.5 148.5 3.5 L 148.5 59.5 C 148.5 62.5 148.5 62.5 145.5 62.5 L 80.5 62.5 74.5 68.5 68.5 62.5 3.5 62.5 C 0.5 62.5 0.5 62.5 0.5 59.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+              isShadow="true" stroke="black" stroke-opacity="0.049999999999999996" stroke-width="5"
+              transform="translate(1, 1)" width="148" height="62"></path>
+        <path fill="none"
+              d="M 3.5 0.5 L 145.5 0.5 C 148.5 0.5 148.5 0.5 148.5 3.5 L 148.5 59.5 C 148.5 62.5 148.5 62.5 145.5 62.5 L 80.5 62.5 74.5 68.5 68.5 62.5 3.5 62.5 C 0.5 62.5 0.5 62.5 0.5 59.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+              isShadow="true" stroke="black" stroke-opacity="0.09999999999999999" stroke-width="3"
+              transform="translate(1, 1)" width="148" height="62"></path>
+        <path fill="none"
+              d="M 3.5 0.5 L 145.5 0.5 C 148.5 0.5 148.5 0.5 148.5 3.5 L 148.5 59.5 C 148.5 62.5 148.5 62.5 145.5 62.5 L 80.5 62.5 74.5 68.5 68.5 62.5 3.5 62.5 C 0.5 62.5 0.5 62.5 0.5 59.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+              isShadow="true" stroke="black" stroke-opacity="0.15" stroke-width="1" transform="translate(1, 1)"
+              width="148" height="62"></path>
+        <path fill="rgba(249, 249, 249, .85)"
+              d="M 3.5 0.5 L 145.5 0.5 C 148.5 0.5 148.5 0.5 148.5 3.5 L 148.5 59.5 C 148.5 62.5 148.5 62.5 145.5 62.5 L 80.5 62.5 74.5 68.5 68.5 62.5 3.5 62.5 C 0.5 62.5 0.5 62.5 0.5 59.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+              stroke="#7cb5ec" stroke-width="1"></path>
+        <text x="8" zIndex="1" style="font-size:12px;color:#333333;fill:#333333;" y="21">
+            <tspan style="font-weight:bold">Random data</tspan>
+            <tspan x="8" dy="16">2014-12-11 16:07:51</tspan>
+            <tspan x="8" dy="16">0.24</tspan>
+        </text>
     </g>
 </svg>

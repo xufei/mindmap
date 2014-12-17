@@ -1,0 +1,73 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="800" height="600" ng-controller="BarController">
+    <title>用AngularJS做图表</title>
+    <desc>用AngularJS生成的图表</desc>
+
+    <!--背景-->
+    <rect x="0" y="0" width="100%" height="100%" stroke-width="1" stroke="none" fill="white"/>
+
+    <!--坐标对齐线-->
+    <defs>
+        <!--纵坐标的对齐线-->
+        <pattern id="y-grid-line" x="0" y="0" ng-attr-height="{{gridY}}" width="100%" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" ng-attr-x2="{{gridX * data.length}}" y2="0" class="grid-line"/>
+        </pattern>
+    </defs>
+
+    <g ng-attr-transform="{{chartTransform()}}">
+        <rect x="0" y="0" ng-attr-width="{{gridX * data.length}}" height="480" fill="url(#y-grid-line)"/>
+    </g>
+
+    <!--坐标刻度线-->
+    <defs>
+	    <!--横坐标的刻度线-->
+	    <pattern id="x-axis-mark" x="0" ng-attr-width="{{gridX}}" height="6" patternUnits="userSpaceOnUse">
+		    <line x1="0" y1="0" x2="0" y2="6" class="axis-mark-main"/>
+	    </pattern>
+
+        <!--纵坐标的刻度线-->
+        <pattern id="y-axis-mark" y="0" width="6" ng-attr-height="{{gridY}}" patternUnits="userSpaceOnUse">
+            <line x1="-1" y1="0" x2="6" y2="0" class="axis-mark-main"/>
+        </pattern>
+    </defs>
+
+    <g ng-attr-transform="{{chartTransform()}}">
+	    <rect x="0" y="-6" ng-attr-width="{{gridX * data.length + 5}}" height="6" fill="url(#x-axis-mark)"/>
+        <rect x="-6" y="0" width="6" height="353.5" fill="url(#y-axis-mark)"/>
+    </g>
+
+    <!--坐标轴-->
+    <g ng-attr-transform="{{chartTransform()}}">
+        <line id="x-axis" x1="0" y1="0" ng-attr-x2="{{gridX * data.length}}" y2="0" class="axis-line-x"/>
+        <line id="y-axis" x1="0" y1="0" x2="0" y2="350" class="axis-line-y"/>
+    </g>
+
+    <!--坐标刻度-->
+    <g class="axis-number-x" text-anchor="middle"
+       ng-attr-transform="{{'translate(' + (offsetX + axisX + 4) + ',' + (offsetY + axisY + 20) + ')'}}">
+        <text ng-repeat="mark in axis.x" ng-attr-x="{{gridX*$index}}">{{mark}}</text>
+    </g>
+
+    <g class="axis-number-y" text-anchor="end"
+       ng-attr-transform="{{'translate(' + (offsetX + axisX -8) + ',' + (offsetY + axisY - 3) + ')'}}">
+        <text ng-repeat="mark in axis.y" ng-attr-y="{{-gridY*$index}}">{{mark}}</text>
+    </g>
+
+    <!--柱子-->
+    <g ng-attr-transform="{{chartTransform()}}">
+        <rect ng-repeat="item in data"
+              ng-class="barClass($index)"
+              ng-attr-x="{{x($index)}}"
+              ng-attr-y="{{y($index)}}"
+              ng-attr-width="{{width($index)}}"
+              ng-attr-height="{{height($index)}}"/>
+    </g>
+
+    <!--图例-->
+    <g ng-attr-transform="{{legendTransform()}}">
+        <rect class="legend-box" x="0" y="0" width="150" ng-attr-height="{{20 + 21*data.length}}"/>
+
+        <rect ng-repeat-start="item in data" ng-class="barClass($index)" transform="scale(1, -1)"
+              x="5" ng-attr-y="{{-21 - 21*$index}}" width="30" height="15"/>
+        <text ng-repeat-end class="legend-text" x="40" ng-attr-y="{{21 + 21*$index}}">{{item.title}}</text>
+    </g>
+</svg>

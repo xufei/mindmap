@@ -1,4 +1,20 @@
-angular.module("ng-charts").controller("BarController", ["$scope", function ($scope) {
+angular.module("ng-charts").controller("BarController", ["$scope", "Chart", function ($scope, Chart) {
+    var chart = new Chart();
+
+    $scope.chart = chart;
+
+    $scope.$watch("data", function(data) {
+        chart.data = data;
+        chart.numbers = [];
+
+        for (var i=0; i<data.length; i++) {
+            chart.numbers[i] = data[i].value;
+        }
+
+        chart.scale();
+    }, true);
+
+    /*
     $scope.axis = {
         x: [],
         y: []
@@ -49,4 +65,5 @@ angular.module("ng-charts").controller("BarController", ["$scope", function ($sc
     $scope.height = function (index) {
         return $scope.gridY * $scope.data[index].value;
     };
+    */
 }]);
