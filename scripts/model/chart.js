@@ -6,6 +6,9 @@ angular.module("ng-charts").factory("Chart", [function () {
 
         this.xAxis = [];
         this.yAxis = [];
+        
+        this.xAxisPath = "";
+        this.yAxisPath = "";
 
         this.data = [];
         this.numbers = [];
@@ -75,6 +78,17 @@ angular.module("ng-charts").factory("Chart", [function () {
             console.log(this.yAxis);
 
             this.baseY = this.yAxis[0].y;
+            
+            for (var i=0; i<this.data.length; i++) {
+                var x = this.offsetLeft + i * 50;
+                this.xAxis.push({
+                    number: this.numbers[i],
+                    x: x
+                });
+                this.xAxis[i].path = "M" + x + "," + this.baseY + " L" + x + "," + (this.baseY - 10);
+            }
+            
+            this.xAxisPath = "M" + this.offsetLeft + "," + this.baseY + " L" + (this.offsetLeft + 500) + "," + this.baseY;
         }
     };
 
