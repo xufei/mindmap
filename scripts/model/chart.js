@@ -1,5 +1,4 @@
 angular.module("ng-charts").factory("Chart", [function () {
-
     function Chart() {
         this.offsetLeft = 50;
         this.offsetTop = 50;
@@ -9,7 +8,6 @@ angular.module("ng-charts").factory("Chart", [function () {
 
         this.data = [];
         this.numbers = [];
-        this.factors = [];
 
         this.clear();
     }
@@ -43,7 +41,6 @@ angular.module("ng-charts").factory("Chart", [function () {
             var range = max - min;
             var oom = Math.floor(Math.log(range) / Math.LN10);
             var step = Math.pow(10, oom);
-            var numOfSteps = Math.round(range / step);
 
             if (oom > 2) {
                 min = Math.pow(10, Math.floor(Math.log(min) / Math.LN10));
@@ -53,10 +50,6 @@ angular.module("ng-charts").factory("Chart", [function () {
                     this.yAxis.push({
                         number: i
                     });
-                }
-
-                for (var i=0; i<this.numbers.length; i++) {
-                    this.factors[i] = Math.log(this.numbers[i]) / Math.LN10;
                 }
             }
             else {
@@ -68,32 +61,53 @@ angular.module("ng-charts").factory("Chart", [function () {
                         number: i
                     });
                 }
-
-                for (var i=0; i<this.numbers.length; i++) {
-                    this.factors[i] = 1;
-                }
             }
 
-            var stepLength = this.height / this.yAxis[this.yAxis.length-1].number;
+            var stepLength;
 
+            if (oom > 2) {
+                stepLength = this.height / (Math.log(this.yAxis[this.yAxis.length-1].number) * Math.LOG10E);
+            }
+            else {
+                stepLength = this.height / this.yAxis[this.yAxis.length-1].number;
+            }
+
+            // 横向的刻度线
             for (var i=0; i<this.yAxis.length; i++) {
-                var y = 500 - (this.offsetTop + this.yAxis[i].number * stepLength);
+                var y;
+
+                if (oom > 2) {
+                    y = Math.log(this.yAxis[i].number) * Math.LOG10E * stepLength;
+                }
+                else {
+                    y = this.yAxis[i].number * stepLength;
+                }
+
                 this.yAxis[i].y = y;
-                this.yAxis[i].path = "M" + this.offsetLeft + "," + y + " L" + (this.offsetLeft + 500) + "," + y;
+                this.yAxis[i].path = "M0," + y + " L500," + y;
             }
-            
+
+            // 数据
             for (var i=0; i<this.data.length; i++) {
                 var x = i * 50;
-                var height = this.numbers[i] * stepLength;
+                var height;
+
+                if (oom > 2) {
+                    height = Math.log(this.numbers[i]) * Math.LOG10E * stepLength;
+                }
+                else {
+                    height = this.numbers[i] * stepLength;
+                }
+
                 this.xAxis.push({
                     number: this.numbers[i],
                     x: x,
                     height: height
                 });
-                this.xAxis[i].path = "M" + x + "," + this.baseY + " L" + x + "," + (this.baseY - 10);
+                this.xAxis[i].path = "M" + x + ",0 L" + x + ", 0";
             }
             
-            this.xAxisPath = "M" + this.offsetLeft + "," + this.baseY + " L" + (this.offsetLeft + 500) + "," + this.baseY;
+            this.xAxisPath = "M" + this.offsetLeft + ",0 L" + (this.offsetLeft + this.width) + ",0";
         }
     };
 

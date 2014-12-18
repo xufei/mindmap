@@ -8,17 +8,22 @@
     <rect x="0" y="0" width="1000" height="800" strokeWidth="0" fill="#FFFFFF" class="highcharts-background"></rect>
 
 
-    <path fill="none" ng-attr-d="{{chart.xAxisPath}}" stroke="#808080" strok-width="4"></path>
+    <path fill="none"
+          ng-attr-transform="{{'translate(0,' + (500-chart.offsetTop) + ')'}}"
+          ng-attr-d="{{chart.xAxisPath}}" stroke="#808080" strok-width="4"></path>
+
     <path fill="rgba(124,181,236,0.25)" d="M 0 0"></path>
 
     <g class="highcharts-grid" zIndex="1"></g>
 
-    <g class="highcharts-grid" zIndex="1">
+    <!--横向间隔线-->
+    <g class="highcharts-grid" zIndex="1" ng-attr-transform="{{'translate(' + chart.offsetLeft + ',' + chart.offsetTop + ')'}}">
         <path ng-repeat="axis in chart.yAxis" ng-attr-d="{{axis.path}}"
               fill="none" stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
     </g>
 
-    <g class="highcharts-axis" zIndex="2">
+    <g class="highcharts-axis" zIndex="2"
+        ng-attr-transform="{{'translate(' + (chart.offsetLeft-50) + ',' + (chart.offsetTop-100) + ')'}}">
         <path ng-repeat="axis in chart.xAxis" fill="none" ng-attr-d="{{axis.path}}" stroke="#C0D0E0" stroke-width="1"
               opacity="1"></path>
     </g>
@@ -29,7 +34,7 @@
     </g>
     <g class="highcharts-series-group" zIndex="3">
         <g class="highcharts-series highcharts-tracker" visibility="visible" zIndex="0.1"
-           ng-attr-transform="{{'translate(' + chart.offsetLeft + ',' + (-chart.offsetTop) + ')'}}" style="cursor:pointer;" clip-path="url(#highcharts-1)">
+            ng-attr-transform="{{'translate(' + chart.offsetLeft + ',' + (-chart.offsetTop) + ')'}}" style="cursor:pointer;" clip-path="url(#highcharts-1)">
 
             <rect ng-repeat="axis in chart.xAxis"
                   fill="#7cb5ec" stroke="#FFFFFF" stroke-width="1" width="30"
@@ -40,21 +45,27 @@
           style="color:#333333;font-size:18px;fill:#333333;width:936px;" y="25">
         <tspan>Test</tspan>
     </text>
+
+    <!--横坐标刻度-->
     <g class="highcharts-axis-labels highcharts-xaxis-labels" zIndex="7"
-       ng-attr-transform="{{'translate(' + (chart.offsetLeft+10) + ',' + (500-chart.offsetTop+15) + ')'}}">
+        ng-attr-transform="{{'translate(' + (chart.offsetLeft+10) + ',' + (500-chart.offsetTop+15) + ')'}}">
         <text ng-repeat="axis in chart.xAxis" ng-attr-x="{{axis.x}}" text-anchor="middle"
               style="color:#606060;cursor:default;font-size:11px;fill:#606060;"
               opacity="1">
             {{axis.number}}
         </text>
     </g>
-    <g class="highcharts-axis-labels highcharts-yaxis-labels" zIndex="7">
-        <text ng-repeat="axis in chart.yAxis" ng-attr-y="{{axis.y}}"
+
+    <!--纵坐标刻度-->
+    <g class="highcharts-axis-labels highcharts-yaxis-labels" zIndex="7"
+        ng-attr-transform="{{'translate(0,' + (chart.height + chart.offsetTop) + ')'}}">
+        <text ng-repeat="axis in chart.yAxis" ng-attr-y="{{-axis.y}}"
               x="40" text-anchor="end" style="width:310px;color:#606060;cursor:default;font-size:11px;fill:#606060;"
               opacity="1">
             {{axis.number}}
         </text>
     </g>
+
     <g class="highcharts-tooltip" zIndex="8" style="cursor:default;padding:0;white-space:nowrap;"
        transform="translate(764,181)" opacity="0" visibility="hidden">
         <path fill="none"
