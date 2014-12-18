@@ -2,10 +2,10 @@
     <desc>ngCharts</desc>
     <defs>
         <clipPath id="highcharts-1">
-            <rect x="0" y="0" width="914" height="317"></rect>
+            <rect x="0" y="0" width="914" height="717"></rect>
         </clipPath>
     </defs>
-    <rect x="0" y="0" width="1000" height="400" strokeWidth="0" fill="#FFFFFF" class="highcharts-background"></rect>
+    <rect x="0" y="0" width="1000" height="800" strokeWidth="0" fill="#FFFFFF" class="highcharts-background"></rect>
 
 
     <path fill="none" ng-attr-d="{{chart.xAxisPath}}" stroke="#808080" strok-width="4"></path>
@@ -28,29 +28,30 @@
         </text>
     </g>
     <g class="highcharts-series-group" zIndex="3">
-        <g class="highcharts-series" visibility="visible" zIndex="0.1" transform="translate(76,46) scale(1 1)"
-           clip-path="url(#highcharts-1)">
+        <g class="highcharts-series highcharts-tracker" visibility="visible" zIndex="0.1"
+           ng-attr-transform="{{'translate(' + chart.offsetLeft + ',' + (-chart.offsetTop) + ')'}}" style="cursor:pointer;" clip-path="url(#highcharts-1)">
 
-            <polyline style="fill:transparent;stroke:#7cb5ec;stroke-width:2"
-                      ng-attr-points="{{path1()}}"></polyline>
-
-            <polyline style="fill:transparent;stroke:#7cb5ec;stroke-width:2"
-                      ng-attr-points="{{path2()}}"></polyline>
+            <rect ng-repeat="axis in chart.xAxis"
+                  fill="#7cb5ec" stroke="#FFFFFF" stroke-width="1" width="30"
+                  ng-attr-x="{{axis.x}}" ng-attr-y="{{500-axis.height}}" ng-attr-height="{{axis.height}}" ></rect>
         </g>
     </g>
     <text x="500" text-anchor="middle" class="highcharts-title" zIndex="4"
           style="color:#333333;font-size:18px;fill:#333333;width:936px;" y="25">
         <tspan>Test</tspan>
     </text>
-    <g class="highcharts-axis-labels highcharts-xaxis-labels" zIndex="7">
+    <g class="highcharts-axis-labels highcharts-xaxis-labels" zIndex="7"
+       ng-attr-transform="{{'translate(' + (chart.offsetLeft+10) + ',' + (500-chart.offsetTop+15) + ')'}}">
         <text ng-repeat="axis in chart.xAxis" ng-attr-x="{{axis.x}}" text-anchor="middle"
-              style="color:#606060;cursor:default;font-size:11px;fill:#606060;" ng-attr-y="{{chart.baseY}}" opacity="0.013815039801161721">
+              style="color:#606060;cursor:default;font-size:11px;fill:#606060;"
+              opacity="1">
             {{axis.number}}
         </text>
     </g>
     <g class="highcharts-axis-labels highcharts-yaxis-labels" zIndex="7">
         <text ng-repeat="axis in chart.yAxis" ng-attr-y="{{axis.y}}"
-              x="40" text-anchor="end" style="width:310px;color:#606060;cursor:default;font-size:11px;fill:#606060;"opacity="1">
+              x="40" text-anchor="end" style="width:310px;color:#606060;cursor:default;font-size:11px;fill:#606060;"
+              opacity="1">
             {{axis.number}}
         </text>
     </g>

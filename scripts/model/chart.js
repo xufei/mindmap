@@ -4,22 +4,30 @@ angular.module("ng-charts").factory("Chart", [function () {
         this.offsetLeft = 50;
         this.offsetTop = 50;
 
-        this.xAxis = [];
-        this.yAxis = [];
-        
-        this.xAxisPath = "";
-        this.yAxisPath = "";
+        this.width = 500;
+        this.height = 400;
+
+        this.baseX = 0;
+        this.baseY = 0;
 
         this.data = [];
         this.numbers = [];
         this.factors = [];
 
-        this.baseX = 0;
-        this.baseY = 0;
+        this.clear();
     }
 
     Chart.prototype = {
+        clear: function() {
+            this.xAxis = [];
+            this.yAxis = [];
+
+            this.xAxisPath = "";
+            this.yAxisPath = "";
+        },
         scale: function () {
+            this.clear();
+
             // 先取用对数取最大最小数据的数量级，如果大于1，就使用非线性坐标轴，如果小于等于1，就用线性坐标轴
             var max = Math.max.apply(null, this.numbers);
             var min = Math.min.apply(null, this.numbers);
@@ -69,8 +77,10 @@ angular.module("ng-charts").factory("Chart", [function () {
                 }
             }
 
+            var stepLength = this.height / max;
+
             for (var i=0; i<this.yAxis.length; i++) {
-                var y = 500 - (this.offsetTop + this.yAxis[i].number * 50);
+                var y = 500 - (this.offsetTop + this.yAxis[i].number * stepLength);
                 this.yAxis[i].y = y;
                 this.yAxis[i].path = "M" + this.offsetLeft + "," + y + " L" + (this.offsetLeft + 500) + "," + y;
             }
@@ -80,10 +90,12 @@ angular.module("ng-charts").factory("Chart", [function () {
             this.baseY = this.yAxis[0].y;
             
             for (var i=0; i<this.data.length; i++) {
-                var x = this.offsetLeft + i * 50;
+                var x = i * 50;
+                var height = this.numbers[i] * stepLength;
                 this.xAxis.push({
                     number: this.numbers[i],
-                    x: x
+                    x: x,
+                    height: height
                 });
                 this.xAxis[i].path = "M" + x + "," + this.baseY + " L" + x + "," + (this.baseY - 10);
             }

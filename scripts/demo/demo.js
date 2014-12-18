@@ -18,7 +18,7 @@ angular.module("ng-charts").controller("DemoController", ["$scope", function ($s
 
     $scope.data = [
         {title: "Test 1", value: 8},
-        {title: "Test 2", value: 2},
+        {title: "Test 2", value: 52},
         {title: "Test 3", value: 6},
         {title: "Test 4", value: 2},
         {title: "Test 5", value: 8}
