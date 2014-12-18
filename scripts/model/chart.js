@@ -7,9 +7,6 @@ angular.module("ng-charts").factory("Chart", [function () {
         this.width = 500;
         this.height = 400;
 
-        this.baseX = 0;
-        this.baseY = 0;
-
         this.data = [];
         this.numbers = [];
         this.factors = [];
@@ -77,17 +74,13 @@ angular.module("ng-charts").factory("Chart", [function () {
                 }
             }
 
-            var stepLength = this.height / max;
+            var stepLength = this.height / this.yAxis[this.yAxis.length-1].number;
 
             for (var i=0; i<this.yAxis.length; i++) {
                 var y = 500 - (this.offsetTop + this.yAxis[i].number * stepLength);
                 this.yAxis[i].y = y;
                 this.yAxis[i].path = "M" + this.offsetLeft + "," + y + " L" + (this.offsetLeft + 500) + "," + y;
             }
-
-            console.log(this.yAxis);
-
-            this.baseY = this.yAxis[0].y;
             
             for (var i=0; i<this.data.length; i++) {
                 var x = i * 50;
