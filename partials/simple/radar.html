@@ -1,0 +1,199 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1000" height="600" ng-controller="RadarController">
+    <desc>ngCharts</desc>
+    <defs>
+        <clipPath id="highcharts-1">
+            <rect x="0" y="0" width="914" height="717"></rect>
+        </clipPath>
+    </defs>
+    <rect x="0" y="0" width="1000" height="400" strokeWidth="0" fill="#FFFFFF" class=" highcharts-background"></rect>
+    <g class="highcharts-button" style="cursor:default;" stroke-linecap="round" transform="translate(966,10)"><title>
+        Chart context menu</title>
+        <rect x="0.5" y="0.5" width="24" height="22" strokeWidth="1" fill="white" stroke="none" stroke-width="1" rx="2"
+              ry="2"></rect>
+        <path fill="#E0E0E0" d="M 6 6.5 L 20 6.5 M 6 11.5 L 20 11.5 M 6 16.5 L 20 16.5" stroke="#666" stroke-width="3"
+              zIndex="1"></path>
+        <text x="0" zIndex="1" style="color:black;fill:black;" y="13"></text>
+    </g>
+    <path fill="rgba(124,181,236,0.25)" d="M 0 0"></path>
+    <path fill="rgba(67,67,72,0.25)" d="M 0 0"></path>
+    <g class="highcharts-grid" zIndex="1">
+        <path fill="none" d="M 423 215.5 L 540.4330447531698 147.7" stroke="#C0C0C0" stroke-width="1" zIndex="1"
+              opacity="1"></path>
+        <path fill="none" d="M 423 215.5 L 540.4330447531698 283.29999999999995" stroke="#C0C0C0" stroke-width="1"
+              zIndex="1" opacity="1"></path>
+        <path fill="none" d="M 423 215.5 L 423 351.1" stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
+        <path fill="none" d="M 423 215.5 L 305.56695524683016 283.30000000000007" stroke="#C0C0C0" stroke-width="1"
+              zIndex="1" opacity="1"></path>
+        <path fill="none" d="M 423 215.5 L 305.56695524683005 147.7000000000001" stroke="#C0C0C0" stroke-width="1"
+              zIndex="1" opacity="1"></path>
+        <path fill="none" d="M 423 215.5 L 423 79.9" stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
+        <path fill="none" d="M 423 215.5 L 423 79.9" stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
+    </g>
+    <g class="highcharts-grid" zIndex="1">
+        <path fill="none" ng-repeat="axis in chart.yAxis" ng-attr-d="{{axis.path}}" stroke-width="1" zIndex="1" opacity="1"></path>
+        <path fill="none"
+              d="M 423 79.9 L 423 79.9 L 305.56695524683005 147.7000000000001 L 305.56695524683016 283.30000000000007 L 423 351.1 L 540.4330447531698 283.29999999999995 L 540.4330447531698 147.7 L 423 79.9"
+              stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
+    </g>
+    <g class="highcharts-axis" zIndex="2"></g>
+    <g class="highcharts-axis" zIndex="2"></g>
+    <g class="highcharts-series-group" zIndex="3">
+        <g class="highcharts-series" visibility="visible" zIndex="0.1" transform="translate(10,46) scale(1 1)"
+           clip-path="url(#highcharts-1)">
+            <path fill="none"
+                  d="M 413 91.756 L 442.74970467080306 152.324 L 506.9464358025359 223.73999999999995 L 413 232.77999999999997 L 386.3818431892815 184.868 L 397.34226069957737 160.46 L 413 91.756"
+                  stroke="#7cb5ec" stroke-width="2" zIndex="1" stroke-linejoin="round" stroke-linecap="round"></path>
+            <path fill="none"
+                  d="M 403 91.756 L 413 91.756 L 442.74970467080306 152.324 L 506.9464358025359 223.73999999999995 L 413 232.77999999999997 L 386.3818431892815 184.868 L 397.34226069957737 160.46 L 413 91.756 L 423 91.756"
+                  stroke-linejoin="round" visibility="visible" stroke="rgba(192,192,192,0.0001)" stroke-width="22"
+                  zIndex="2" class=" highcharts-tracker" style=""></path>
+        </g>
+        <g class="highcharts-markers highcharts-tracker" visibility="visible" zIndex="0.1"
+           transform="translate(10,46) scale(1 1)" style="" clip-path="none">
+            <path fill="#7cb5ec"
+                  d="M 397.34226069957737 156.46 C 402.67026069957734 156.46 402.67026069957734 164.46 397.34226069957737 164.46 C 392.0142606995774 164.46 392.0142606995774 156.46 397.34226069957737 156.46 Z"
+                  stroke-width="1"></path>
+            <path fill="#7cb5ec"
+                  d="M 386.3818431892815 180.868 C 391.70984318928146 180.868 391.70984318928146 188.868 386.3818431892815 188.868 C 381.0538431892815 188.868 381.0538431892815 180.868 386.3818431892815 180.868 Z"
+                  stroke-width="1"></path>
+            <path fill="#7cb5ec"
+                  d="M 413 228.77999999999997 C 418.328 228.77999999999997 418.328 236.77999999999997 413 236.77999999999997 C 407.672 236.77999999999997 407.672 228.77999999999997 413 228.77999999999997 Z"></path>
+            <path fill="#7cb5ec"
+                  d="M 506.9464358025359 219.73999999999995 C 512.2744358025359 219.73999999999995 512.2744358025359 227.73999999999995 506.9464358025359 227.73999999999995 C 501.61843580253594 227.73999999999995 501.61843580253594 219.73999999999995 506.9464358025359 219.73999999999995 Z"
+                  stroke-width="1"></path>
+            <path fill="#7cb5ec"
+                  d="M 442.74970467080306 148.324 C 448.07770467080303 148.324 448.07770467080303 156.324 442.74970467080306 156.324 C 437.4217046708031 156.324 437.4217046708031 148.324 442.74970467080306 148.324 Z"
+                  stroke-width="1"></path>
+            <path fill="#7cb5ec"
+                  d="M 413 87.756 C 418.328 87.756 418.328 95.756 413 95.756 C 407.672 95.756 407.672 87.756 413 87.756 Z"></path>
+        </g>
+        <g class="highcharts-series" visibility="visible" zIndex="0.1" transform="translate(10,46) scale(1 1)"
+           clip-path="url(#highcharts-1)">
+            <path fill="none"
+                  d="M 413 79.10000000000001 L 474.0651832716483 134.244 L 478.76250506177513 207.468 L 413 225.548 L 372.2898778189011 193.00400000000002 L 391.0791649794083 156.84400000000002 L 413 79.10000000000001"
+                  stroke="#434348" stroke-width="2" zIndex="1" stroke-linejoin="round" stroke-linecap="round"></path>
+            <path fill="none"
+                  d="M 403 79.10000000000001 L 413 79.10000000000001 L 474.0651832716483 134.244 L 478.76250506177513 207.468 L 413 225.548 L 372.2898778189011 193.00400000000002 L 391.0791649794083 156.84400000000002 L 413 79.10000000000001 L 423 79.10000000000001"
+                  stroke-linejoin="round" visibility="visible" stroke="rgba(192,192,192,0.0001)" stroke-width="22"
+                  zIndex="2" class=" highcharts-tracker" style=""></path>
+        </g>
+        <g class="highcharts-markers highcharts-tracker" visibility="visible" zIndex="0.1"
+           transform="translate(10,46) scale(1 1)" style="" clip-path="none">
+            <path fill="#434348"
+                  d="M 391.0791649794083 152.84400000000002 L 395.0791649794083 156.84400000000002 391.0791649794083 160.84400000000002 387.0791649794083 156.84400000000002 Z"
+                  stroke-width="1"></path>
+            <path fill="#434348"
+                  d="M 372.2898778189011 189.00400000000002 L 376.2898778189011 193.00400000000002 372.2898778189011 197.00400000000002 368.2898778189011 193.00400000000002 Z"
+                  stroke-width="1"></path>
+            <path fill="#434348" d="M 413 221.548 L 417 225.548 413 229.548 409 225.548 Z"></path>
+            <path fill="#434348"
+                  d="M 478.76250506177513 203.468 L 482.76250506177513 207.468 478.76250506177513 211.468 474.76250506177513 207.468 Z"
+                  stroke-width="1"></path>
+            <path fill="#434348"
+                  d="M 474.0651832716483 130.244 L 478.0651832716483 134.244 474.0651832716483 138.244 470.0651832716483 134.244 Z"
+                  stroke-width="1"></path>
+            <path fill="#434348"
+                  d="M 413 75.10000000000001 L 417 79.10000000000001 413 83.10000000000001 409 79.10000000000001 Z"></path>
+        </g>
+    </g>
+    <text x="420" text-anchor="middle" class="highcharts-title" zIndex="4"
+          style="color:#333333;font-size:18px;fill:#333333;width:936px;" y="25">
+        <tspan>Budget vs spending</tspan>
+    </text>
+    <g class="highcharts-legend" zIndex="7" transform="translate(856,80)">
+        <g zIndex="1">
+            <g>
+                <g class="highcharts-legend-item" zIndex="1" transform="translate(8,3)">
+                    <path fill="none" d="M 0 11 L 16 11" stroke="#7cb5ec" stroke-width="2"></path>
+                    <path fill="#7cb5ec"
+                          d="M 8 7 C 13.328 7 13.328 15 8 15 C 2.6719999999999997 15 2.6719999999999997 7 8 7 Z"></path>
+                    <text x="21" style="color:#333333;font-size:12px;font-weight:bold;cursor:pointer;fill:#333333;"
+                          text-anchor="start" zIndex="2" y="15">
+                        <tspan>Allocated Budget</tspan>
+                    </text>
+                </g>
+                <g class="highcharts-legend-item" zIndex="1" transform="translate(8,17)">
+                    <path fill="none" d="M 0 11 L 16 11" stroke="#434348" stroke-width="2"></path>
+                    <path fill="#434348" d="M 8 7 L 12 11 8 15 4 11 Z"></path>
+                    <text x="21" y="15"
+                          style="color:#333333;font-size:12px;font-weight:bold;cursor:pointer;fill:#333333;"
+                          text-anchor="start" zIndex="2">
+                        <tspan>Actual Spending</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g class="highcharts-axis-labels highcharts-xaxis-labels" zIndex="7">
+        <text x="423" text-anchor="middle" style="width:98px;color:#606060;cursor:default;font-size:11px;fill:#606060;"
+              y="70.415625" opacity="1">Sales
+        </text>
+        <text x="553.4234258099365" text-anchor="start"
+              style="width:98px;color:#606060;cursor:default;font-size:11px;fill:#606060;" y="145.715625" opacity="1">
+            Marketing
+        </text>
+        <text x="553.4234258099365" text-anchor="start"
+              style="width:98px;color:#606060;cursor:default;font-size:11px;fill:#606060;" y="296.31562499999995"
+              opacity="1">Development
+        </text>
+        <text x="423" text-anchor="middle" style="width:98px;color:#606060;cursor:default;font-size:11px;fill:#606060;"
+              y="371.615625" opacity="1">
+            <tspan>Customer Support</tspan>
+        </text>
+        <text x="292.5765741900636" text-anchor="end"
+              style="width:98px;color:#606060;cursor:default;font-size:11px;fill:#606060;" y="288.31562500000007"
+              opacity="1">
+            <tspan>Information</tspan>
+            <tspan dy="16" x="292.5765741900636">Technology</tspan>
+        </text>
+        <text x="292.5765741900635" text-anchor="end"
+              style="width:98px;color:#606060;cursor:default;font-size:11px;fill:#606060;" y="145.7156250000001"
+              opacity="1">Administration
+        </text>
+        <text x="0" text-anchor="middle" style="width:98px;color:#606060;cursor:default;font-size:11px;fill:#606060;"
+              y="-9999">6
+        </text>
+    </g>
+    <g class="highcharts-axis-labels highcharts-yaxis-labels" zIndex="7">
+        <text x="420" text-anchor="end" style="width:310px;color:#606060;cursor:default;font-size:11px;fill:#606060;"
+              y="213.5" opacity="1">0k
+        </text>
+        <text x="420" text-anchor="end" style="width:310px;color:#606060;cursor:default;font-size:11px;fill:#606060;"
+              y="168.3" opacity="1">25k
+        </text>
+        <text x="420" text-anchor="end" style="width:310px;color:#606060;cursor:default;font-size:11px;fill:#606060;"
+              y="123.10000000000001" opacity="1">50k
+        </text>
+        <text x="0" text-anchor="end" style="width:310px;color:#606060;cursor:default;font-size:11px;fill:#606060;"
+              y="-9999">75k
+        </text>
+    </g>
+    <g class="highcharts-tooltip" zIndex="8" style="cursor:default;padding:0;white-space:nowrap;"
+       transform="translate(315,230)" opacity="0" visibility="hidden">
+        <path fill="none"
+              d="M 3.5 0.5 L 170.5 0.5 C 173.5 0.5 173.5 0.5 173.5 3.5 L 173.5 57.5 C 173.5 60.5 173.5 60.5 170.5 60.5 L 3.5 60.5 C 0.5 60.5 0.5 60.5 0.5 57.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+              isShadow="true" stroke="black" stroke-opacity="0.049999999999999996" stroke-width="5"
+              transform="translate(1, 1)" width="173" height="60"></path>
+        <path fill="none"
+              d="M 3.5 0.5 L 170.5 0.5 C 173.5 0.5 173.5 0.5 173.5 3.5 L 173.5 57.5 C 173.5 60.5 173.5 60.5 170.5 60.5 L 3.5 60.5 C 0.5 60.5 0.5 60.5 0.5 57.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+              isShadow="true" stroke="black" stroke-opacity="0.09999999999999999" stroke-width="3"
+              transform="translate(1, 1)" width="173" height="60"></path>
+        <path fill="none"
+              d="M 3.5 0.5 L 170.5 0.5 C 173.5 0.5 173.5 0.5 173.5 3.5 L 173.5 57.5 C 173.5 60.5 173.5 60.5 170.5 60.5 L 3.5 60.5 C 0.5 60.5 0.5 60.5 0.5 57.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+              isShadow="true" stroke="black" stroke-opacity="0.15" stroke-width="1" transform="translate(1, 1)"
+              width="173" height="60"></path>
+        <path fill="rgba(249, 249, 249, .85)"
+              d="M 3.5 0.5 L 170.5 0.5 C 173.5 0.5 173.5 0.5 173.5 3.5 L 173.5 57.5 C 173.5 60.5 173.5 60.5 170.5 60.5 L 3.5 60.5 C 0.5 60.5 0.5 60.5 0.5 57.5 L 0.5 3.5 C 0.5 0.5 0.5 0.5 3.5 0.5"
+              stroke="#7cb5ec" stroke-width="1"></path>
+        <text x="8" zIndex="1" style="font-size:12px;color:#333333;fill:#333333;" y="21">
+            <tspan style="font-size: 10px">Development</tspan>
+            <tspan style="fill:#7cb5ec" x="8" dy="16">Allocated Budget:</tspan>
+            <tspan style="font-weight:bold" dx="0">$60,000</tspan>
+            <tspan style="fill:#434348" x="8" dy="16">Actual Spending:</tspan>
+            <tspan style="font-weight:bold" dx="0">$42,000</tspan>
+        </text>
+    </g>
+    <text x="990" text-anchor="end" zIndex="8" style="cursor:pointer;color:#909090;font-size:9px;fill:#909090;" y="395">
+        Highcharts.com
+    </text>
+</svg>
