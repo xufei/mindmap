@@ -11,6 +11,6 @@ angular.module("ng-charts").controller("RadarController", ["$scope", "Chart", fu
             chart.numbers[i] = data[i].value;
         }
 
-        chart.scale1();
+        chart.radar();
     }, true);
 }]);

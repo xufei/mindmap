@@ -11,7 +11,7 @@ angular.module("ng-charts").controller("BarController", ["$scope", "Chart", func
             chart.numbers[i] = data[i].value;
         }
 
-        chart.scale();
+        chart.cartesian();
     }, true);
 
     /*
