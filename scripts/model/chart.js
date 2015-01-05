@@ -147,6 +147,7 @@ angular.module("ng-charts").factory("Chart", [function () {
             // 射线
             var center = (this.offsetLeft + this.width / 2) + " " + (this.offsetTop + this.height / 2);
             var numArr = [];
+            var markerPathArr = [];
 
             var total = this.numbers.length;
             for (var i = 0; i < this.numbers.length; i++) {
@@ -171,11 +172,22 @@ angular.module("ng-charts").factory("Chart", [function () {
                 var y = this.offsetTop + Math.round(Math.sin((i / total) * (2 * Math.PI)) * r) + this.height / 2;
 
                 numArr.push(x + " " + y + " ");
+
+                var markerArr = [];
+                var markerCorner = 20;
+                for (var j=0; j<markerCorner; j++) {
+                    var m = x + 5 * Math.cos((j / markerCorner) * (2 * Math.PI));
+                    var n = y + 5 * Math.sin((j / markerCorner) * (2 * Math.PI));
+
+                    markerArr.push(m + " " + n + " ");
+                }
+
+                markerPathArr.push("M" + markerArr.join("L "));
             }
             numArr[numArr.length] = numArr[0];
 
             this.dataPath = "M" + numArr.join("L ");
-            console.log(this.dataPath);
+            this.markerPathArr = markerPathArr;
         }
     };
 

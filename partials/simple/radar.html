@@ -1,4 +1,4 @@
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1000" height="600" ng-controller="RadarController">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="1000" height="600">
     <desc>ngCharts</desc>
     <defs>
         <clipPath id="highcharts-1">
@@ -6,22 +6,24 @@
         </clipPath>
     </defs>
     <rect x="0" y="0" width="1000" height="400" strokeWidth="0" fill="#FFFFFF" class=" highcharts-background"></rect>
-    <g class="highcharts-button" style="cursor:default;" stroke-linecap="round" transform="translate(966,10)"><title>
+    <!--g class="highcharts-button" style="cursor:default;" stroke-linecap="round" transform="translate(966,10)"><title>
         Chart context menu</title>
         <rect x="0.5" y="0.5" width="24" height="22" strokeWidth="1" fill="white" stroke="none" stroke-width="1" rx="2"
               ry="2"></rect>
         <path fill="#E0E0E0" d="M 6 6.5 L 20 6.5 M 6 11.5 L 20 11.5 M 6 16.5 L 20 16.5" stroke="#666" stroke-width="3"
               zIndex="1"></path>
         <text x="0" zIndex="1" style="color:black;fill:black;" y="13"></text>
-    </g>
+    </g-->
     <path fill="rgba(124,181,236,0.25)" d="M 0 0"></path>
     <path fill="rgba(67,67,72,0.25)" d="M 0 0"></path>
     <g class="highcharts-grid" zIndex="1">
-        <path fill="none" ng-repeat="axis in chart.xAxis" ng-attr-d="{{axis.path}}" stroke="#C0C0C0" stroke-width="1" zIndex="1"
+        <path fill="none" ng-repeat="axis in chart.xAxis" ng-attr-d="{{axis.path}}" stroke="#C0C0C0" stroke-width="1"
+              zIndex="1"
               opacity="1"></path>
     </g>
     <g class="highcharts-grid" zIndex="1">
-        <path fill="none" ng-repeat="axis in chart.yAxis" ng-attr-d="{{axis.path}}" stroke="#C0C0C0" stroke-width="1" zIndex="1" opacity="1"></path>
+        <path fill="none" ng-repeat="axis in chart.yAxis" ng-attr-d="{{axis.path}}" stroke="#C0C0C0" stroke-width="1"
+              zIndex="1" opacity="1"></path>
     </g>
     <g class="highcharts-axis" zIndex="2"></g>
     <g class="highcharts-axis" zIndex="2"></g>
@@ -36,15 +38,9 @@
                   stroke-linejoin="round" visibility="visible" stroke="rgba(192,192,192,0.0001)" stroke-width="22"
                   zIndex="2" class=" highcharts-tracker" style=""></path>
         </g>
-        <g class="highcharts-markers highcharts-tracker" visibility="visible" zIndex="0.1"
-           transform="translate(10,46) scale(1 1)" style="" clip-path="none">
-            <path fill="#7cb5ec"
-                  d="M 413 87.756 C 418.328 87.756 418.328 95.756 413 95.756 C 407.672 95.756 407.672 87.756 413 87.756 Z"></path>
-        </g>
-        <g class="highcharts-markers highcharts-tracker" visibility="visible" zIndex="0.1"
-           transform="translate(10,46) scale(1 1)" style="" clip-path="none">
-            <path fill="#434348"
-                  d="M 413 75.10000000000001 L 417 79.10000000000001 413 83.10000000000001 409 79.10000000000001 Z"></path>
+        <g class="highcharts-markers highcharts-tracker" visibility="visible" zIndex="0.1" clip-path="none">
+            <path fill="#434348" ng-repeat="marker in chart.markerPathArr"
+                  ng-attr-d="{{marker}}"></path>
         </g>
     </g>
     <text x="420" text-anchor="middle" class="highcharts-title" zIndex="4"
